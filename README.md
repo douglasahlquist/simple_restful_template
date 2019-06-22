@@ -1,13 +1,13 @@
 # Programming Challenge  
 
-## Task Description
-### • Implement a Java Web Application that meets the specification of the "Document Storage REST Web Service" below.
-### • Limit the scope to the specification. The only error cases to be aware of are those outlined in the specification.
-### • The web application should be packaged as a WAR and should run in Tomcat and Java 1.8.
-### • Documents don't need to be persisted across server shutdown.
-### • Documents metadata (like file name and size) should be stored in a in memory DB 
+### Task Description
+#### • Implement a Java Web Application that meets the specification of the "Document Storage REST Web Service" below.
+#### • Limit the scope to the specification. The only error cases to be aware of are those outlined in the specification.
+#### • The web application should be packaged as a WAR and should run in Tomcat and Java 1.8.
+#### • Documents don't need to be persisted across server shutdown.
+#### • Documents metadata (like file name and size) should be stored in a in memory DB 
 
-## Implement the below service using Spring Boot & Java 8.
+### Implement the below service using Spring Boot & Java 8.
 
 #### Document Storage REST Web Service Specification
 - The Document Storage Service is a simple RESTful web service that allows clients to create, update, query, and delete documents. A document can be anything - text, image, pdf, etc.
@@ -17,18 +17,17 @@
 - A document can be deleted by sending a DELETE request with no content to /storage/documents/{docId}, where {docId} is the document ID issued during creation. On success, a 204 No Content HTTP response is sent. A 404 Not Found HTTP response is returned if the document ID is invalid.
 
 ### Summary
-#### Create - POST /storage/documents
-#### Query - GET /storage/documents/{docId} 
-#### Update - PUT /storage/documents/{docId} 
-# Delete - DELETE /storage/documents/{docId}
+- Create - POST /storage/documents
+- Query - GET /storage/documents/{docId} 
+- Update - PUT /storage/documents/{docId} 
+- Delete - DELETE /storage/documents/{docId}
  
 ### Examples:
 
-#### Create
+## Create
 ---
 Request:
-
-POST /storage/documents
+__POST /storage/documents__
 Content-Length: 11
 hello world
 
@@ -41,7 +40,7 @@ ONWZ4UUVV8S31JCB662P
 #### Query
 ---
 Request:
-GET /storage/documents/ONWZ4UUVV8S31JCB662P
+__GET /storage/documents/ONWZ4UUVV8S31JCB662P__
 
 Response:
 200 OK
@@ -52,7 +51,7 @@ hello world
 #### Update
 ---
 Request:
-PUT /storage/documents/ONWZ4UUVV8S31JCB662P Content-Length: 13
+__PUT /storage/documents/ONWZ4UUVV8S31JCB662P Content-Length: 13__
 goodbye world
 
 Response:
@@ -62,7 +61,7 @@ Response:
 #### Delete
 ---
 Request:
-DELETE /storage/documents/ONWZ4UUVV8S31JCB662P
+__DELETE /storage/documents/ONWZ4UUVV8S31JCB662P__
 
 Response:
 204 No Content
