@@ -17,52 +17,61 @@
 - A document can be deleted by sending a DELETE request with no content to /storage/documents/{docId}, where {docId} is the document ID issued during creation. On success, a 204 No Content HTTP response is sent. A 404 Not Found HTTP response is returned if the document ID is invalid.
 
 ### Summary
-- Create - POST /storage/documents
-- Query - GET /storage/documents/{docId} 
-- Update - PUT /storage/documents/{docId} 
+- Create - POST   /storage/documents
+- Query  - GET    /storage/documents/{docId} 
+- Update - PUT    /storage/documents/{docId} 
 - Delete - DELETE /storage/documents/{docId}
  
 ### Examples:
 
-## Create
----
-Request:
-__POST /storage/documents__
-Content-Length: 11
-hello world
+#### Create
+```
+Request URL:
+  POST /storage/documents
+Reqest Header:
+  Content-Length: 11
+Request Body:
+  hello world
 
-Response:
-201 Created
-Content-Type: text/plain; charset=us-ascii Content-Length: 20
-ONWZ4UUVV8S31JCB662P
----
+Response Code:
+  201 Created
+Response Header:
+  Content-Type: text/plain; charset=us-ascii
+  Content-Length: 20
+Response Body:
+  ONWZ4UUVV8S31JCB662P
+```
 
 #### Query
----
-Request:
-__GET /storage/documents/ONWZ4UUVV8S31JCB662P__
+```
+Request URL:
+  GET /storage/documents/ONWZ4UUVV8S31JCB662P
 
-Response:
-200 OK
-Content-Length: 11
-hello world
----
+Response Code:
+  200 OK
+Response Header:
+  Content-Length: 11
+Response Body
+  hello world
+```
 
 #### Update
----
-Request:
-__PUT /storage/documents/ONWZ4UUVV8S31JCB662P Content-Length: 13__
-goodbye world
-
-Response:
-204 No Content
----
+```
+Request URL:
+  PUT /storage/documents/ONWZ4UUVV8S31JCB662P
+Request Header:
+  Content-Length: 13
+Request Body:
+  goodbye world
+Response Code:
+  204 No Content
+```
 
 #### Delete
----
-Request:
-__DELETE /storage/documents/ONWZ4UUVV8S31JCB662P__
+```
+Request URL:
+  DELETE /storage/documents/ONWZ4UUVV8S31JCB662P
 
-Response:
-204 No Content
+Response Code:
+  204 No Content
 ---
