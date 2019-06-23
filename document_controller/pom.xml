@@ -5,11 +5,12 @@
 	<groupId>com.ahlquist.document</groupId>
 	<artifactId>Document_Controller</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.source.version>12</java.source.version>
-		<java.target.version>12</java.target.version>
+		<java.source.version>1.8</java.source.version>
+		<java.target.version>1.8</java.target.version>
 		<start-class>com.ahlquist.document.app.SpringBootApp</start-class>
 	</properties>
 
