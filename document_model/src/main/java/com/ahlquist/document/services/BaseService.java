@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 
+import com.ahlquist.document.model.Document;
+
 //import com.ahlquist.document.builder.IEntityBuilder;
 
 /**
@@ -17,85 +19,81 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
  * 
  * @author Douglas Ahlquist
  *
- * @param <R>
- *            - The Repository Class
- * @param <T>
- *            - The Entity Type
- * @param <K>
- *            - The Key into the database for this Entity Service
+ * @param <R> - The Repository Class
+ * @param <T> - The Entity Type
+ * @param <K> - The Key into the database for this Entity Service
  */
 
-public abstract class BaseService
-    <R extends CrudRepository<T, K>, T, K>
-    implements IBaseService<T, K> {
+public abstract class BaseService<R extends CrudRepository<T, K>, T, K> implements IBaseService<T, K> {
 
-    final static Logger logger = Logger.getLogger(BaseService.class);
+	final static Logger logger = Logger.getLogger(BaseService.class);
 
-    @Autowired
-    SessionFactory sessionFactory;
+	@Autowired
+	SessionFactory sessionFactory;
 
-    @Autowired
-    HibernateTransactionManager transactionManager;
+	@Autowired
+	HibernateTransactionManager transactionManager;
 
-    protected final String ID_PRESENT_ERROR = "Error Cannot create instance of %s with id=%d present";
+	protected final String ID_PRESENT_ERROR = "Error Cannot create instance of %s with id=%d present";
 
-    public BaseService(final R repository) {
-        this.repository = repository;
-        
-    }
+	public BaseService(final R repository) {
+		this.repository = repository;
 
-    // The Repository used in accessing the database
-    private R repository;
+	}
 
-    public R getRepository() {
-        return repository;
-    }
+	// The Repository used in accessing the database
+	private R repository;
 
-    @Override
-    public Optional<T> findById(K id) {
-        return repository.findById(id);
-    }
+	public R getRepository() {
+		return repository;
+	}
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public T create(T t) throws IllegalArgumentException {
-        logger.info("creating entity: " + t.toString());
-        Session s = sessionFactory.openSession();
-        Transaction tr = s.beginTransaction();
-        s.save(t);
-        tr.commit();
-        s.close();
-        return t;
-    }
+	public Optional<T> findById(K id) {
+		return repository.findById(id);
+	}
 
-    public void delete(T t) throws IllegalArgumentException {
-        Session s = sessionFactory.openSession();
-        Transaction tr = s.beginTransaction();
-        s.delete(t);
-        tr.commit();
-        s.close();
-    }
+	// @SuppressWarnings("unchecked")
+	public T create(T t) throws IllegalArgumentException {
+		logger.info("creating entity: " + t.toString());
+		Session s = sessionFactory.openSession();
+		Transaction tr = s.beginTransaction();
+		s.save(t);
+		tr.commit();
+		s.close();
+		return t;
+	}
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public T save(T t) {
-        Session s = sessionFactory.openSession();
-        Transaction tr = s.beginTransaction();
-        t = (T) s.save(t);
-        tr.commit();
-        s.close();
-        return t;
-    }
+	public void delete(T t) throws IllegalArgumentException {
+		Session s = sessionFactory.openSession();
+		Transaction tr = s.beginTransaction();
+		s.delete(t);
+		tr.commit();
+		s.close();
+	}
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public T merge(T t) {
-        Session s = sessionFactory.openSession();
-        Transaction tr = s.beginTransaction();
-        t = (T) s.merge(t);
-        tr.commit();
-        s.close();
-        return t;
-    }
+	public void deleteById(T l) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public T save(T t) {
+		Session s = sessionFactory.openSession();
+		Transaction tr = s.beginTransaction();
+		t = (T) s.save(t);
+		tr.commit();
+		s.close();
+		return t;
+	}
+
+	@SuppressWarnings("unchecked")
+	public T merge(T t) {
+		Session s = sessionFactory.openSession();
+		Transaction tr = s.beginTransaction();
+		t = (T) s.merge(t);
+		tr.commit();
+		s.close();
+		return t;
+	}
 
 }
