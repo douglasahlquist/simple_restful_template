@@ -10,15 +10,14 @@ import org.springframework.data.repository.CrudRepository;
 import com.ahlquist.document.model.Document;
 import com.ahlquist.document.repositories.DocumentRepository;
 
-public class DocumentService extends BaseService<DocumentRepository, Document, Long>
-		implements IBaseService<Document, Long> {
+public class DocumentService extends BaseService<DocumentRepository, Document, String>
+		implements IBaseService<Document, String> {
 
 	final static Logger logger = Logger.getLogger(DocumentService.class);
 
 	@Autowired
 	public DocumentService(@Qualifier("documentRepository") final DocumentRepository repository) {
 		super(repository);
-		// TODO Auto-generated constructor stub
 	}
 
 }

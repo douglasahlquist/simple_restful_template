@@ -16,14 +16,14 @@ import com.ahlquist.document.utils.*;
  *
  */
 @Table(name = "document")
-public class Document extends GeneratedIdEntity<Long> implements Serializable, IBaseEntity<Long> {
+public class Document extends GeneratedIdEntity<String> implements Serializable, IBaseEntity<String> {
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
-		result = prime * result + ((filename == null) ? 0 : filename.hashCode());
+		result = prime * result + ((metadata == null) ? 0 : metadata.hashCode());
 		result = prime * result + (int) (length ^ (length >>> 32));
 		return result;
 	}
@@ -42,10 +42,10 @@ public class Document extends GeneratedIdEntity<Long> implements Serializable, I
 				return false;
 		} else if (!content.equals(other.content))
 			return false;
-		if (filename == null) {
-			if (other.filename != null)
+		if (metadata == null) {
+			if (other.metadata != null)
 				return false;
-		} else if (!filename.equals(other.filename))
+		} else if (!metadata.equals(other.metadata))
 			return false;
 		if (length != other.length)
 			return false;
@@ -59,8 +59,8 @@ public class Document extends GeneratedIdEntity<Long> implements Serializable, I
 	}
 
 	private String content;
-	private long length;
-	private String filename;
+	private Long length;
+	private String metadata;
 
 	public String getContent() {
 		return this.content;
@@ -70,19 +70,19 @@ public class Document extends GeneratedIdEntity<Long> implements Serializable, I
 		this.content = content;
 	}
 
-	public long getLength() {
+	public Long getLength() {
 		return this.length;
 	}
 
-	public void setLength(long length) {
+	public void setLength(Long length) {
 		this.length = length;
 	}
 
-	public String getFilename() {
-		return this.filename;
+	public String getMetadata() {
+		return this.metadata;
 	}
 
-	public void setFilename(String filename) {
-		this.filename = filename;
+	public void setMetadata(String metadata) {
+		this.metadata = metadata;
 	}
 }
