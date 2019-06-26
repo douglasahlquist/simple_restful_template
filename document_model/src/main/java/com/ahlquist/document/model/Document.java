@@ -15,6 +15,7 @@ import com.ahlquist.document.utils.*;
  * @author Douglas Ahlquist
  *
  */
+@Entity
 @Table(name = "document")
 public class Document extends GeneratedIdEntity<String> implements Serializable, IBaseEntity<String> {
 

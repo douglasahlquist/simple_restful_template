@@ -7,8 +7,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import com.ahlquist.document.model.Document;
 
@@ -32,7 +34,8 @@ public abstract class BaseService<R extends CrudRepository<T, K>, T, K> implemen
 	SessionFactory sessionFactory;
 
 	@Autowired
-	HibernateTransactionManager transactionManager;
+	@Qualifier("transactionManager")
+	PlatformTransactionManager transactionManager;
 
 	protected final String ID_PRESENT_ERROR = "Error Cannot create instance of %s with id=%d present";
 

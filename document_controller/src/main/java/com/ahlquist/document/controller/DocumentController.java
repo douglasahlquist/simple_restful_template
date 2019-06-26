@@ -3,13 +3,10 @@ package com.ahlquist.document.controller;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ahlquist.document.ex.services.DocumentExService;
+import com.ahlquist.document.ex.services.DocumentService;
 import com.ahlquist.document.model.Document;
 
 
@@ -38,7 +35,7 @@ public class DocumentController {
 
     @Autowired
     @Qualifier("documentService")
-    DocumentExService documentExService;
+    DocumentService documentService;
     
     private Map<String, Object> getHeaders(){
     	return WebUtils.getHeadersInfo(request);
@@ -64,7 +61,7 @@ Response Body
     @ResponseBody
     ResponseEntity<String> get(@PathVariable final String documentId) throws JSONException {
 
-    	Optional<Document> oDocument = this.documentExService.get(documentId);
+    	Optional<Document> oDocument = this.documentService.get(documentId);
     	if(oDocument.isPresent()) {
     		Document d = oDocument.get();
     		HttpHeaders headers = WebUtils.getResponseHeaders(d);
@@ -101,7 +98,7 @@ Response Body:
 
     	Map<String, Object> headers = getHeaders();
 
-        Optional<Document> oDocument = documentExService.create(content, headers);
+        Optional<Document> oDocument = documentService.create(content, headers);
         if(oDocument.isPresent()) {
         	Document d = oDocument.get();
         	return new ResponseEntity<String>(d.getId(), WebUtils.getResponseHeaders(d), HttpStatus.CREATED);
@@ -136,9 +133,9 @@ Response Body:
     public ResponseEntity<String> update(@PathVariable final String documentId, @RequestBody String content) {
 
     	Map<String, Object> headers = getHeaders();
-    	Optional<Document> oDocument = this.documentExService.findById(documentId);
+    	Optional<Document> oDocument = this.documentService.findById(documentId);
         if(oDocument.isPresent()) {
-            Optional<Document> oNewDocument = documentExService.update(documentId, content, headers); 
+            Optional<Document> oNewDocument = documentService.update(documentId, content, headers); 
             if(oNewDocument.isPresent()) {
             	
             	MultiValueMap<String, String> mvMap = null;
@@ -157,7 +154,7 @@ Response Body:
     @ResponseBody
     public ResponseEntity<String> delete(@PathVariable final String documentId) {
     	
-        boolean result = this.documentExService.delete(documentId);
+        boolean result = this.documentService.delete(documentId);
         if(result) {
             return new ResponseEntity<String>("success", HttpStatus.NO_CONTENT);
         }else {

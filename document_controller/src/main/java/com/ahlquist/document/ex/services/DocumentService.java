@@ -3,9 +3,7 @@ package com.ahlquist.document.ex.services;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,12 +11,21 @@ import org.springframework.stereotype.Service;
 import com.ahlquist.document.controller.WebUtils;
 import com.ahlquist.document.model.Document;
 import com.ahlquist.document.repositories.DocumentRepository;
+import com.ahlquist.document.services.BaseService;
+import com.ahlquist.document.services.IBaseService;
 import com.ahlquist.document.utils.RandomStr;
-import com.ahlquist.document.services.DocumentService;
 
-@Service("documentExService")
-public class DocumentExService extends DocumentService {
+@Service
+public class DocumentService extends BaseService<DocumentRepository, Document, String>
+		implements IBaseService<Document, String> {
 
+	final static Logger logger = Logger.getLogger(DocumentService.class);
+
+	@Autowired
+	public DocumentService( @Qualifier("documentRepository") final DocumentRepository repository) {
+		super(repository);
+	}
+	
 	public final static int UUID_LENGTH = 20;
 
 	/**
@@ -27,11 +34,6 @@ public class DocumentExService extends DocumentService {
 	 */
 	protected String generateUUID() {
 		return RandomStr.generateUUID(UUID_LENGTH);
-	}
-
-	@Autowired
-	public DocumentExService(@Qualifier("documentRepository") final DocumentRepository repository) {
-		super(repository);
 	}
 
 	/**
@@ -113,4 +115,5 @@ public class DocumentExService extends DocumentService {
 		}
 		return false;
 	}
+
 }

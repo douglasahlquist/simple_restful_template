@@ -1,14 +1,19 @@
 package com.ahlquist.document.config;
 
 import java.util.Properties;
+
 import javax.sql.DataSource;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -18,12 +23,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("com.ahlquist.document.repository")
-@PropertySource("classpath:database.properties")
+@EnableJpaRepositories("com.ahlquist.document.repositories")
+@PropertySource("classpath:application.properties")
 public class JPAConfig {
 	@Autowired
 	private Environment env;
 
+	@Primary
 	@Bean(name = "entityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
 		LocalContainerEntityManagerFactoryBean lcemfb = new LocalContainerEntityManagerFactoryBean();
@@ -41,13 +47,22 @@ public class JPAConfig {
 		return adapter;
 	}
 
+	@Bean("sessionFactory")
+	public LocalSessionFactoryBean LocalSessionFactory() {
+		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+		sessionFactory.setDataSource(getDataSource());
+		sessionFactory.setPackagesToScan(new String[] { "com.ahlquist.document.model" });
+		sessionFactory.setHibernateProperties(jpaProperties());
+		return sessionFactory;
+	}
+
 	@Bean
 	public DataSource getDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(env.getProperty("database.driverClassName"));
-		dataSource.setUrl(env.getProperty("database.url"));
-		dataSource.setUsername(env.getProperty("database.username"));
-		dataSource.setPassword(env.getProperty("database.password"));
+		dataSource.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
+		dataSource.setUrl(env.getProperty("spring.datasource.url"));
+		dataSource.setUsername(env.getProperty("spring.datasource.username"));
+		dataSource.setPassword(env.getProperty("spring.datasource.password"));
 		return dataSource;
 	}
 

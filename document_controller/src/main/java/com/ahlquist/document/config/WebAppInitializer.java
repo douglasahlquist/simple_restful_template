@@ -1,4 +1,4 @@
-package com.ahlquist;
+package com.ahlquist.document.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer  {

@@ -1,4 +1,4 @@
-package com.ahlquist;
+package com.ahlquist.document.config;
   
 import java.util.List;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +9,8 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration 
-@ComponentScan("com.ahlquisgt") 
+@ComponentScan({"com.ahlquist", "com.ahlquist.document.services", "com.ahlquist.document.ex.services", 
+	"com.ahlquist.document.model", "com.ahlquist.document.repositories"}) 
 @EnableWebMvc   
 public class AppConfig implements WebMvcConfigurer {  
     @Override
