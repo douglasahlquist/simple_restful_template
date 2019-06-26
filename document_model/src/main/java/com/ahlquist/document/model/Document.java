@@ -16,7 +16,7 @@ import com.ahlquist.document.utils.*;
  *
  */
 @Entity
-@Table(name = "document")
+@Table(name = "DOCUMENT")
 public class Document extends GeneratedIdEntity<String> implements Serializable, IBaseEntity<String> {
 
 	@Override
