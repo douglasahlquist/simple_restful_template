@@ -176,7 +176,7 @@ public class DocumentController {
 			// This is not documented in the requirements, but if on success NO_CONTENT is
 			// return,
 			// on failure should return BAD_REQUEST
-			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
 		}
 	}
 }
