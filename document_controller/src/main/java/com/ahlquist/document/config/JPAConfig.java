@@ -65,6 +65,9 @@ public class JPAConfig {
 		dataSource.setPassword(env.getProperty("spring.datasource.password"));
 		return dataSource;
 	}
+	
+	@Bean(destroyMethod = "")
+	public DataSource dataSource() {return getDataSource();}
 
 	@Bean(name = "transactionManager")
 	public PlatformTransactionManager txManager() {

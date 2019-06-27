@@ -9,14 +9,15 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration 
-@ComponentScan({"com.ahlquist", "com.ahlquist.document.services", "com.ahlquist.document.ex.services", 
-	"com.ahlquist.document.model", "com.ahlquist.document.repositories"}) 
+@ComponentScan({"com.ahlquist", "com.ahlquist.document.services", 
+	"com.ahlquist.document.ex.services", "com.ahlquist.document.model", 
+	"com.ahlquist.document.repositories"}) 
 @EnableWebMvc   
 public class AppConfig implements WebMvcConfigurer {  
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
         builder.indentOutput(true);
-        converters.add(new MappingJackson2HttpMessageConverter(builder.build()));
+   //     converters.add(new MappingJackson2HttpMessageConverter(builder.build()));
     }
 } 
