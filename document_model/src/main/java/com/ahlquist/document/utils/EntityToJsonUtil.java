@@ -24,7 +24,7 @@ public class EntityToJsonUtil<T> {
 		HashMap<String, String> fieldNames = new HashMap<>();
 		HashMap<String, String> fieldType = new HashMap<>();
 
-		// This is an ugly hack to get around not being able to pass
+		// This is not so great hack to get around not being able to pass
 		// in T obj and calling T.getClass().getDeclaredFields()
 		List<T> list = new ArrayList<T>();
 		list.add(obj);
@@ -46,16 +46,11 @@ public class EntityToJsonUtil<T> {
 				final String fieldFromMethodName = fieldFromMethodNameOrig.substring(0, 1).toLowerCase()
 						+ fieldFromMethodNameOrig.substring(1);
 
-				// logger.debug("fieldFromMethodName: : " + fieldFromMethodName + " from: " +
-				// methodName);
-
 				if (methodName.startsWith("get") && !"getId".equals(methodName)
 						&& (methodName.length() > "get".length())) {
 					// add logic to bypass 'id' fields
 
 					Object invokeResult = method.invoke(list.get(0));
-					// logger.debug(">>>>>>>>>>> methodName: " + methodName + " invoke result: " +
-					// invokeResult);
 					if (invokeResult != null) {
 
 						String type = fieldType.get(fieldFromMethodName.toLowerCase());
@@ -78,6 +73,7 @@ public class EntityToJsonUtil<T> {
 						} else if ("short".equals(type)) {
 							json.put(fieldFromMethodName, (short) (invokeResult));
 						}
+						//TODO (dahlquist) : add additional logic to jsonize non-primative types
 					}
 				}
 			}

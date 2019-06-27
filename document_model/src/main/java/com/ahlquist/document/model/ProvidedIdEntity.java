@@ -8,7 +8,7 @@ import javax.persistence.MappedSuperclass;
 import com.ahlquist.document.utils.EntityToJsonUtil;
 
 @MappedSuperclass
-public class GeneratedIdEntity<K> implements IBaseEntity<K> {
+public class ProvidedIdEntity<K> implements IBaseEntity<K> {
 
 	@Override
 	public int hashCode() {
@@ -26,7 +26,7 @@ public class GeneratedIdEntity<K> implements IBaseEntity<K> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		GeneratedIdEntity other = (GeneratedIdEntity) obj;
+		ProvidedIdEntity other = (ProvidedIdEntity) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -38,22 +38,21 @@ public class GeneratedIdEntity<K> implements IBaseEntity<K> {
 	/**
 	 * @param id
 	 */
-	public GeneratedIdEntity(K id) {
+	public ProvidedIdEntity(K id) {
 		super();
 		this.id = id;
 	}
 
-	public GeneratedIdEntity() {
+	public ProvidedIdEntity() {
 		super();
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public K id;
 
 	@Override
 	public String toString() {
-		return new EntityToJsonUtil<GeneratedIdEntity<K>>().toString(this);
+		return new EntityToJsonUtil<ProvidedIdEntity<K>>().toString(this);
 	}
 
 	/*

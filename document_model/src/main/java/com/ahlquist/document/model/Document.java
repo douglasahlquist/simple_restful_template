@@ -16,8 +16,8 @@ import com.ahlquist.document.utils.*;
  *
  */
 @Entity
-@Table(name = "DOCUMENT")
-public class Document extends GeneratedIdEntity<String> implements Serializable, IBaseEntity<String> {
+@Table(name = "Document")
+public class Document extends ProvidedIdEntity<String> implements Serializable, IBaseEntity<String> {
 
 	@Override
 	public int hashCode() {

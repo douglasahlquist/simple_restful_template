@@ -66,13 +66,13 @@ public abstract class BaseService<R extends CrudRepository<T, K>, T, K> implemen
 		return t;
 	}
 
-	public void delete(T t) throws IllegalArgumentException {
-		Session s = sessionFactory.openSession();
-		Transaction tr = s.beginTransaction();
-		s.delete(t);
-		tr.commit();
-		s.close();
-	}
+//	public void delete(T t) throws IllegalArgumentException {
+//		Session s = sessionFactory.openSession();
+//		Transaction tr = s.beginTransaction();
+//		s.delete(t);
+//		tr.commit();
+//		s.close();
+//	}
 
 	public void deleteById(T l) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
@@ -89,7 +89,7 @@ public abstract class BaseService<R extends CrudRepository<T, K>, T, K> implemen
 		return t;
 	}
 
-	@SuppressWarnings("unchecked")
+/*	@SuppressWarnings("unchecked")
 	public T merge(T t) {
 		Session s = sessionFactory.openSession();
 		Transaction tr = s.beginTransaction();
@@ -97,6 +97,6 @@ public abstract class BaseService<R extends CrudRepository<T, K>, T, K> implemen
 		tr.commit();
 		s.close();
 		return t;
-	}
+	}*/
 
 }
