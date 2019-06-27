@@ -77,3 +77,18 @@ Request URL:
 Response Code:
   204 No Content
 ```
+
+## Build Instructions
+### Dependencies 
+- Install Java (version 8, 9, 10, 11, or 12)
+- Install latest version of Apache Maven
+- Install 'git'
+- Add Java, Maven and Git to your systems path
+### Download
+- Create a Directory for this git repository
+- Download project with the commanad 'git clone https://github.com/douglasahlquist/simple_restful_template.git'
+### Build
+- run the command 'mvn clean install'
+### Run the Server
+- Run the command 'java -jar document_controller/target/Document_Controller-0.0.1-SNAPSHOT.war' from the project root folder
+
